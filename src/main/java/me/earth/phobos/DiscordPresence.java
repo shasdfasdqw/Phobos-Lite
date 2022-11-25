@@ -30,8 +30,6 @@ public class DiscordPresence {
         DiscordPresence.presence.largeImageText = "Phobos 1.9.0";
         DiscordPresence.presence.smallImageText = "craw";
         DiscordPresence.partyId = GameEngine.GetPartyId();
-        DiscordPresence.partySize = 1;
-        DiscordPresence.partyMax = 6;
         rpc.Discord_UpdatePresence(presence);
         thread = new Thread(() -> {
             while (!Thread.currentThread().isInterrupted()) {
