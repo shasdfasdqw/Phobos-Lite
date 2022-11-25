@@ -66,7 +66,6 @@ public class ModuleManager
         this.modules.add(new HoleTP());
         this.modules.add(new NoFall());
         this.modules.add(new LongJump());
-        this.modules.add(new LagBlock());
         this.modules.add(new BoatFly());
         this.modules.add(new Reach());
         this.modules.add(new LiquidInteract());
