@@ -7,7 +7,7 @@ import java.util.Objects;
 
 public class AntiWeakness
         extends Module {
-    public AntiLevitate() {
+    public AntiWeakness() {
         super("AntiWeakness", "Only Client side lol", Module.Category.MOVEMENT, false, false, false);
     }
 
