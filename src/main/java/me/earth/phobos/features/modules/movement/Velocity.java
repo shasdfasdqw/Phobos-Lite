@@ -24,7 +24,6 @@ public class Velocity
     public Setting<Boolean> bobbers = this.register(new Setting<Boolean>("Bobbers", true));
     public Setting<Boolean> water = this.register(new Setting<Boolean>("Water", false));
     public Setting<Boolean> blocks = this.register(new Setting<Boolean>("Blocks", false));
-    public Setting<Boolean> ice = this.register(new Setting<Boolean>("Ice", false));
 
     public Velocity() {
         super("Velocity", "Allows you to control your velocity", Module.Category.MOVEMENT, true, false, false);
@@ -40,24 +39,6 @@ public class Velocity
 
     private void setInstance() {
         INSTANCE = this;
-    }
-
-    @Override
-    public void onUpdate() {
-        if (IceSpeed.getINSTANCE().isOff() && this.ice.getValue().booleanValue()) {
-            Blocks.ICE.slipperiness = 0.6f;
-            Blocks.PACKED_ICE.slipperiness = 0.6f;
-            Blocks.FROSTED_ICE.slipperiness = 0.6f;
-        }
-    }
-
-    @Override
-    public void onDisable() {
-        if (IceSpeed.getINSTANCE().isOff()) {
-            Blocks.ICE.slipperiness = 0.98f;
-            Blocks.PACKED_ICE.slipperiness = 0.98f;
-            Blocks.FROSTED_ICE.slipperiness = 0.98f;
-        }
     }
 
     @SubscribeEvent
