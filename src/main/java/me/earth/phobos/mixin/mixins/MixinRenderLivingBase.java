@@ -35,7 +35,10 @@ extends Render<T> {
     private void renderModelHook(ModelBase modelBase, Entity entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
         Color visibleColor;
         boolean cancel = false;
+        if (Skeleton.getInstance().isEnabled() || ESP.getInstance().isEnabled()) {
             RenderEntityModelEvent event = new RenderEntityModelEvent(0, modelBase, entityIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
+            if (Skeleton.getInstance().isEnabled()) {
+                Skeleton.getInstance().onRenderModel(event);
             }
             if (ESP.getInstance().isEnabled()) {
                 ESP.getInstance().onRenderModel(event);
