@@ -66,7 +66,7 @@ public class ModuleManager
         this.modules.add(new Speed());
         this.modules.add(new Step());
         this.modules.add(new Sprint());
-        this.modules.add(new AntiLevitate());
+        this.modules.add(new AntiWeakness());
         this.modules.add(new Phase());
         this.modules.add(new TPSpeed());
         this.modules.add(new ElytraFlight());
