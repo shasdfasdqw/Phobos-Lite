@@ -21,12 +21,17 @@ public class DiscordPresence {
 
     public static void start() {
         DiscordEventHandlers handlers = new DiscordEventHandlers();
-        rpc.Discord_Initialize("737779695134834695", handlers, true, "");
+        rpc.Discord_Initialize("1038863213426659328", handlers, true, "");
         DiscordPresence.presence.startTimestamp = System.currentTimeMillis() / 1000L;
         DiscordPresence.presence.details = Minecraft.getMinecraft().currentScreen instanceof GuiMainMenu ? "In the main menu." : "Playing " + (Minecraft.getMinecraft().currentServerData != null ? (RPC.INSTANCE.showIP.getValue().booleanValue() ? "on " + Minecraft.getMinecraft().currentServerData.serverIP + "." : " multiplayer.") : " singleplayer.");
         DiscordPresence.presence.state = RPC.INSTANCE.state.getValue();
-        DiscordPresence.presence.largeImageKey = "phobos";
+        DiscordPresence.presence.largeImageKey = "ghost";
+        DiscordPresence.smallImageKey = "Phobos";
         DiscordPresence.presence.largeImageText = "Phobos 1.9.0";
+        DiscordPresence.presence.smallImageText = "craw";
+        DiscordPresence.partyId = GameEngine.GetPartyId();
+        DiscordPresence.partySize = 1;
+        DiscordPresence.partyMax = 6;
         rpc.Discord_UpdatePresence(presence);
         thread = new Thread(() -> {
             while (!Thread.currentThread().isInterrupted()) {
