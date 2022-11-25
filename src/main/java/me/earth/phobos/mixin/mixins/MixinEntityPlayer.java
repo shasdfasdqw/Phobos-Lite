@@ -3,7 +3,6 @@ package me.earth.phobos.mixin.mixins;
 import com.mojang.authlib.GameProfile;
 import me.earth.phobos.Phobos;
 import me.earth.phobos.features.modules.movement.Phase;
-import me.earth.phobos.features.modules.movement.TestPhase;
 import me.earth.phobos.features.modules.player.TpsSync;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -33,8 +32,6 @@ extends EntityLivingBase {
     @Inject(method={"isEntityInsideOpaqueBlock"}, at={@At(value="HEAD")}, cancellable=true)
     private void isEntityInsideOpaqueBlockHook(CallbackInfoReturnable<Boolean> info) {
         if (Phase.getInstance().isOn() && Phase.getInstance().type.getValue() != Phase.PacketFlyMode.NONE) {
-            info.setReturnValue(false);
-        } else if (TestPhase.getInstance().isOn()) {
             info.setReturnValue(false);
         }
     }
