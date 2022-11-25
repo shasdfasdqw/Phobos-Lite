@@ -13,8 +13,8 @@ public class AntiWeakness
 
     @Override
     public void onUpdate() {
-        if (AntiLevitate.mc.player.isPotionActive(Objects.requireNonNull(Potion.getPotionFromResourceLocation("weakness")))) {
-            AntiLevitate.mc.player.removeActivePotionEffect(Potion.getPotionFromResourceLocation("weakness"));
+        if (AntiWeakness.mc.player.isPotionActive(Objects.requireNonNull(Potion.getPotionFromResourceLocation("weakness")))) {
+            AntiWeakness.mc.player.removeActivePotionEffect(Potion.getPotionFromResourceLocation("weakness"));
         }
     }
 }
