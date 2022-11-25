@@ -178,7 +178,6 @@ public class ModuleManager
         this.moduleColorMap.put(this.getModuleByClass(Trajectories.class), new Color(98, 18, 223));
         this.moduleColorMap.put(this.getModuleByClass(VoidESP.class), new Color(68, 178, 142));
         this.moduleColorMap.put(this.getModuleByClass(XRay.class), new Color(217, 118, 37));
-        this.moduleColorMap.put(this.getModuleByClass(AntiLevitate.class), new Color(206, 255, 255));
         this.moduleColorMap.put(this.getModuleByClass(ElytraFlight.class), new Color(55, 161, 201));
         this.moduleColorMap.put(this.getModuleByClass(HoleTP.class), new Color(68, 178, 142));
         this.moduleColorMap.put(this.getModuleByClass(LongJump.class), new Color(228, 27, 213));
