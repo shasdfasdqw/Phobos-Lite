@@ -55,7 +55,6 @@ public class ModuleManager
         this.modules.add(new Spammer());
         this.modules.add(new AntiVanish());
         this.modules.add(new Nuker());
-        this.modules.add(new AutoReconnect());
         this.modules.add(new AntiPackets());
         this.modules.add(new RPC());
         this.modules.add(new AutoGG());
@@ -154,7 +153,6 @@ public class ModuleManager
         this.moduleColorMap.put(this.getModuleByClass(AntiPackets.class), new Color(155, 186, 115));
         this.moduleColorMap.put(this.getModuleByClass(AntiVanish.class), new Color(25, 209, 135));
         this.moduleColorMap.put(this.getModuleByClass(AutoGG.class), new Color(240, 49, 110));
-        this.moduleColorMap.put(this.getModuleByClass(AutoReconnect.class), new Color(17, 85, 153));
         this.moduleColorMap.put(this.getModuleByClass(ChatModifier.class), new Color(255, 59, 216));
         this.moduleColorMap.put(this.getModuleByClass(NoHandShake.class), new Color(173, 232, 139));
         this.moduleColorMap.put(this.getModuleByClass(NoSoundLag.class), new Color(255, 56, 0));
@@ -215,7 +213,6 @@ public class ModuleManager
         this.moduleColorMap.put(this.getModuleByClass(Speedmine.class), new Color(152, 166, 113));
         this.moduleColorMap.put(this.getModuleByClass(TimerSpeed.class), new Color(255, 133, 18));
         this.moduleColorMap.put(this.getModuleByClass(TpsSync.class), new Color(93, 144, 153));
-        this.moduleColorMap.put(this.getModuleByClass(TrueDurability.class), new Color(254, 161, 51));
         this.moduleColorMap.put(this.getModuleByClass(XCarry.class), new Color(254, 161, 51));
         this.moduleColorMap.put(this.getModuleByClass(Capes.class), new Color(26, 135, 104));
         this.moduleColorMap.put(this.getModuleByClass(ClickGui.class), new Color(26, 81, 135));
