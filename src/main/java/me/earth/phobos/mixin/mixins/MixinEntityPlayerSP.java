@@ -5,7 +5,6 @@ import me.earth.phobos.event.events.ChatEvent;
 import me.earth.phobos.event.events.MoveEvent;
 import me.earth.phobos.event.events.PushEvent;
 import me.earth.phobos.event.events.UpdateWalkingPlayerEvent;
-import me.earth.phobos.features.modules.misc.BetterPortals;
 import me.earth.phobos.features.modules.movement.Speed;
 import me.earth.phobos.features.modules.movement.Sprint;
 import me.earth.phobos.util.Util;
@@ -39,20 +38,6 @@ extends AbstractClientPlayer {
     public void sendChatMessage(String message, CallbackInfo callback) {
         ChatEvent chatEvent = new ChatEvent(message);
         MinecraftForge.EVENT_BUS.post((Event)chatEvent);
-    }
-
-    @Redirect(method={"onLivingUpdate"}, at=@At(value="INVOKE", target="Lnet/minecraft/client/entity/EntityPlayerSP;closeScreen()V"))
-    public void closeScreenHook(EntityPlayerSP entityPlayerSP) {
-        if (!BetterPortals.getInstance().isOn() || !BetterPortals.getInstance().portalChat.getValue().booleanValue()) {
-            entityPlayerSP.closeScreen();
-        }
-    }
-
-    @Redirect(method={"onLivingUpdate"}, at=@At(value="INVOKE", target="Lnet/minecraft/client/Minecraft;displayGuiScreen(Lnet/minecraft/client/gui/GuiScreen;)V"))
-    public void displayGuiScreenHook(Minecraft mc, GuiScreen screen) {
-        if (!BetterPortals.getInstance().isOn() || !BetterPortals.getInstance().portalChat.getValue().booleanValue()) {
-            mc.displayGuiScreen(screen);
-        }
     }
 
     @Redirect(method={"onLivingUpdate"}, at=@At(value="INVOKE", target="Lnet/minecraft/client/entity/EntityPlayerSP;setSprinting(Z)V", ordinal=2))
