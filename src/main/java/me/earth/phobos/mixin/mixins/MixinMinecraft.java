@@ -4,7 +4,6 @@ import javax.annotation.Nullable;
 import me.earth.phobos.Phobos;
 import me.earth.phobos.features.gui.custom.GuiCustomMainScreen;
 import me.earth.phobos.features.modules.client.Managers;
-import me.earth.phobos.features.modules.client.Screens;
 import me.earth.phobos.features.modules.player.MultiTask;
 import me.earth.phobos.features.modules.render.NoRender;
 import net.minecraft.client.Minecraft;
@@ -57,14 +56,7 @@ public abstract class MixinMinecraft {
             Display.sync((int)maxFps);
         }
     }
-
-    @Inject(method={"runTick()V"}, at={@At(value="RETURN")})
-    private void runTick(CallbackInfo callbackInfo) {
-        if (Minecraft.getMinecraft().currentScreen instanceof GuiMainMenu && Screens.INSTANCE.mainScreen.getValue().booleanValue()) {
-            Minecraft.getMinecraft().displayGuiScreen((GuiScreen)new GuiCustomMainScreen());
-        }
-    }
-
+    
     @Inject(method={"displayGuiScreen"}, at={@At(value="HEAD")})
     private void displayGuiScreen(GuiScreen screen, CallbackInfo ci) {
         if (screen instanceof GuiMainMenu) {
