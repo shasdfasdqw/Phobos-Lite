@@ -29,23 +29,6 @@ extends Render<T> {
 
     public MixinRenderLivingBase(RenderManager renderManagerIn, ModelBase modelBaseIn, float shadowSizeIn) {
         super(renderManagerIn);
-    }
-
-    @Redirect(method={"renderModel"}, at=@At(value="INVOKE", target="Lnet/minecraft/client/model/ModelBase;render(Lnet/minecraft/entity/Entity;FFFFFF)V"))
-    private void renderModelHook(ModelBase modelBase, Entity entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
-        Color visibleColor;
-        boolean cancel = false;
-        if (Skeleton.getInstance().isEnabled() || ESP.getInstance().isEnabled()) {
-            RenderEntityModelEvent event = new RenderEntityModelEvent(0, modelBase, entityIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
-            if (Skeleton.getInstance().isEnabled()) {
-                Skeleton.getInstance().onRenderModel(event);
-            }
-            if (ESP.getInstance().isEnabled()) {
-                ESP.getInstance().onRenderModel(event);
-                if (event.isCanceled()) {
-                    cancel = true;
-                }
-            }
         }
         if (Chams.getInstance().isEnabled() && entityIn instanceof EntityPlayer && Chams.getInstance().colored.getValue().booleanValue() && !Chams.getInstance().textured.getValue().booleanValue()) {
             if (!Chams.getInstance().textured.getValue().booleanValue()) {
