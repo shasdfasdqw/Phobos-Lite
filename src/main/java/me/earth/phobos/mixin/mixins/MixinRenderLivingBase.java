@@ -31,6 +31,17 @@ extends Render<T> {
         super(renderManagerIn);
     }
 
+    @Redirect(method={"renderModel"}, at=@At(value="INVOKE", target="Lnet/minecraft/client/model/ModelBase;render(Lnet/minecraft/entity/Entity;FFFFFF)V"))
+    private void renderModelHook(ModelBase modelBase, Entity entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
+        Color visibleColor;
+        boolean cancel = false;
+            if (ESP.getInstance().isEnabled()) {
+                ESP.getInstance().onRenderModel(event);
+                if (event.isCanceled()) {
+                    cancel = true;
+                }
+            }
+        }
         if (Chams.getInstance().isEnabled() && entityIn instanceof EntityPlayer && Chams.getInstance().colored.getValue().booleanValue() && !Chams.getInstance().textured.getValue().booleanValue()) {
             if (!Chams.getInstance().textured.getValue().booleanValue()) {
                 GL11.glPushAttrib((int)1048575);
@@ -108,4 +119,3 @@ extends Render<T> {
         }
     }
 }
-
