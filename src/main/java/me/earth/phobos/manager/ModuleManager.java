@@ -52,7 +52,6 @@ public class ModuleManager
         this.modules.add(new NoHandShake());
         this.modules.add(new PingSpoof());
         this.modules.add(new NoSoundLag());
-        this.modules.add(new Spammer());
         this.modules.add(new AntiVanish());
         this.modules.add(new Nuker());
         this.modules.add(new AntiPackets());
