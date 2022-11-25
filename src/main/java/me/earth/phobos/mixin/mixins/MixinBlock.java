@@ -6,7 +6,6 @@ import me.earth.phobos.features.modules.movement.Flight;
 import me.earth.phobos.features.modules.movement.Phase;
 import me.earth.phobos.features.modules.player.Freecam;
 import me.earth.phobos.features.modules.player.Jesus;
-import me.earth.phobos.features.modules.render.XRay;
 import me.earth.phobos.util.EntityUtil;
 import me.earth.phobos.util.Util;
 import net.minecraft.block.Block;
@@ -41,19 +40,6 @@ public abstract class MixinBlock {
                 if (entityBox.intersects(offset)) {
                     collidingBoxes.add(offset);
                 }
-                info.cancel();
-            }
-        }
-        catch (Exception exception) {
-            // empty catch block
-        }
-    }
-
-    @Inject(method={"isFullCube"}, at={@At(value="HEAD")}, cancellable=true)
-    public void isFullCubeHook(IBlockState blockState, CallbackInfoReturnable<Boolean> info) {
-        try {
-            if (XRay.getInstance().isOn()) {
-                info.setReturnValue(XRay.getInstance().shouldRender((Block)Block.class.cast(this)));
                 info.cancel();
             }
         }
