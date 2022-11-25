@@ -57,6 +57,7 @@ public class ModuleManager
         this.modules.add(new AntiPackets());
         this.modules.add(new RPC());
         this.modules.add(new AutoGG());
+        this.modules.add(new Flight());
         this.modules.add(new EntityControl());
         this.modules.add(new GhastNotifier());
         this.modules.add(new ReverseStep());
