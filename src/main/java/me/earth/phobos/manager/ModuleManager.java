@@ -43,11 +43,7 @@ public class ModuleManager
         this.modules.add(new AntiTrap());
         this.modules.add(new BedBomb());
         this.modules.add(new ArmorMessage());
-        this.modules.add(new Crasher());
-        this.modules.add(new Auto32k());
         this.modules.add(new AntiCrystal());
-        this.modules.add(new AnvilAura());
-        this.modules.add(new GodModule());
         this.modules.add(new ChatModifier());
         this.modules.add(new NoHandShake());
         this.modules.add(new PingSpoof());
@@ -114,13 +110,10 @@ public class ModuleManager
         this.modules.add(new ClickGui());
         this.modules.add(new Managers());
         this.modules.add(new Components());
-        this.modules.add(new StreamerMode());
         this.modules.add(new Capes());
         this.modules.add(new Colors());
         this.modules.add(new ServerModule());
-        this.modules.add(new Screens());
         this.modules.add(new Media());
-        this.modules.add(new IRC());
         this.moduleColorMap.put(this.getModuleByClass(AntiTrap.class), new Color(128, 53, 69));
         this.moduleColorMap.put(this.getModuleByClass(AnvilAura.class), new Color(90, 227, 96));
         this.moduleColorMap.put(this.getModuleByClass(ArmorMessage.class), new Color(255, 51, 51));
