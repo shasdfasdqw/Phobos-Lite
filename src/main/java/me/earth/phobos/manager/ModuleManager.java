@@ -115,15 +115,12 @@ public class ModuleManager
         this.modules.add(new ServerModule());
         this.modules.add(new Media());
         this.moduleColorMap.put(this.getModuleByClass(AntiTrap.class), new Color(128, 53, 69));
-        this.moduleColorMap.put(this.getModuleByClass(AnvilAura.class), new Color(90, 227, 96));
         this.moduleColorMap.put(this.getModuleByClass(ArmorMessage.class), new Color(255, 51, 51));
-        this.moduleColorMap.put(this.getModuleByClass(Auto32k.class), new Color(185, 212, 144));
         this.moduleColorMap.put(this.getModuleByClass(AutoArmor.class), new Color(74, 227, 206));
         this.moduleColorMap.put(this.getModuleByClass(AutoCrystal.class), new Color(255, 15, 43));
         this.moduleColorMap.put(this.getModuleByClass(AutoTrap.class), new Color(193, 49, 244));
         this.moduleColorMap.put(this.getModuleByClass(BedBomb.class), new Color(185, 80, 195));
         this.moduleColorMap.put(this.getModuleByClass(BowSpam.class), new Color(204, 191, 153));
-        this.moduleColorMap.put(this.getModuleByClass(Crasher.class), new Color(208, 66, 9));
         this.moduleColorMap.put(this.getModuleByClass(Criticals.class), new Color(204, 151, 184));
         this.moduleColorMap.put(this.getModuleByClass(HoleFiller.class), new Color(166, 55, 110));
         this.moduleColorMap.put(this.getModuleByClass(Killaura.class), new Color(255, 37, 0));
@@ -196,8 +193,6 @@ public class ModuleManager
         this.moduleColorMap.put(this.getModuleByClass(Notifications.class), new Color(170, 153, 255));
         this.moduleColorMap.put(this.getModuleByClass(ServerModule.class), new Color(60, 110, 175));
         this.moduleColorMap.put(this.getModuleByClass(Media.class), new Color(138, 45, 13));
-        this.moduleColorMap.put(this.getModuleByClass(Screens.class), new Color(165, 89, 101));
-        this.moduleColorMap.put(this.getModuleByClass(StreamerMode.class), new Color(0, 0, 0));
         for (Module module : this.modules) {
             module.animation.start();
         }
