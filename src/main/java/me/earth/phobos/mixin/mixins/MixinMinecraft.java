@@ -81,7 +81,6 @@ public abstract class MixinMinecraft {
 
     private void unload() {
         System.out.println("Shutting down: saving configuration");
-        Phobos.onUnload();
         System.out.println("Configuration saved.");
     }
 
