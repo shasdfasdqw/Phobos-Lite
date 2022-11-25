@@ -74,7 +74,6 @@ public class ModuleManager
         this.modules.add(new NoSlowDown());
         this.modules.add(new HoleTP());
         this.modules.add(new NoFall());
-        this.modules.add(new IceSpeed());
         this.modules.add(new LongJump());
         this.modules.add(new LagBlock());
         this.modules.add(new BoatFly());
