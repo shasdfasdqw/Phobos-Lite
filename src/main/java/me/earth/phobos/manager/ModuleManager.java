@@ -65,7 +65,6 @@ public class ModuleManager
         this.modules.add(new Velocity());
         this.modules.add(new Speed());
         this.modules.add(new Step());
-        this.modules.add(new StepOld());
         this.modules.add(new Sprint());
         this.modules.add(new AntiLevitate());
         this.modules.add(new Phase());
@@ -189,7 +188,6 @@ public class ModuleManager
         this.moduleColorMap.put(this.getModuleByClass(Speed.class), new Color(55, 161, 196));
         this.moduleColorMap.put(this.getModuleByClass(Sprint.class), new Color(148, 184, 142));
         this.moduleColorMap.put(this.getModuleByClass(Step.class), new Color(144, 212, 203));
-        this.moduleColorMap.put(this.getModuleByClass(StepOld.class), new Color(144, 212, 203));
         this.moduleColorMap.put(this.getModuleByClass(Strafe.class), new Color(0, 204, 255));
         this.moduleColorMap.put(this.getModuleByClass(TPSpeed.class), new Color(20, 177, 142));
         this.moduleColorMap.put(this.getModuleByClass(Velocity.class), new Color(115, 134, 140));
