@@ -50,7 +50,6 @@ public class ModuleManager
         this.modules.add(new NoSoundLag());
         this.modules.add(new AntiVanish());
         this.modules.add(new Nuker());
-        this.modules.add(new AntiPackets());
         this.modules.add(new RPC());
         this.modules.add(new AutoGG());
         this.modules.add(new Flight());
@@ -58,10 +57,8 @@ public class ModuleManager
         this.modules.add(new ReverseStep());
         this.modules.add(new Strafe());
         this.modules.add(new Velocity());
-        this.modules.add(new Speed());
         this.modules.add(new Step());
         this.modules.add(new Sprint());
-        this.modules.add(new AntiWeakness());
         this.modules.add(new Phase());
         this.modules.add(new TPSpeed());
         this.modules.add(new ElytraFlight());
@@ -71,7 +68,6 @@ public class ModuleManager
         this.modules.add(new LongJump());
         this.modules.add(new LagBlock());
         this.modules.add(new BoatFly());
-        this.modules.add(new VanillaSpeed());
         this.modules.add(new Reach());
         this.modules.add(new LiquidInteract());
         this.modules.add(new FakePlayer());
@@ -129,7 +125,6 @@ public class ModuleManager
         this.moduleColorMap.put(this.getModuleByClass(Surround.class), new Color(100, 0, 150));
         this.moduleColorMap.put(this.getModuleByClass(Webaura.class), new Color(11, 161, 121));
         this.moduleColorMap.put(this.getModuleByClass(AntiCrystal.class), new Color(255, 161, 121));
-        this.moduleColorMap.put(this.getModuleByClass(AntiPackets.class), new Color(155, 186, 115));
         this.moduleColorMap.put(this.getModuleByClass(AntiVanish.class), new Color(25, 209, 135));
         this.moduleColorMap.put(this.getModuleByClass(AutoGG.class), new Color(240, 49, 110));
         this.moduleColorMap.put(this.getModuleByClass(ChatModifier.class), new Color(255, 59, 216));
@@ -160,7 +155,6 @@ public class ModuleManager
         this.moduleColorMap.put(this.getModuleByClass(NoFall.class), new Color(61, 204, 78));
         this.moduleColorMap.put(this.getModuleByClass(NoSlowDown.class), new Color(61, 204, 78));
         this.moduleColorMap.put(this.getModuleByClass(Phase.class), new Color(186, 144, 212));
-        this.moduleColorMap.put(this.getModuleByClass(Speed.class), new Color(55, 161, 196));
         this.moduleColorMap.put(this.getModuleByClass(Sprint.class), new Color(148, 184, 142));
         this.moduleColorMap.put(this.getModuleByClass(Step.class), new Color(144, 212, 203));
         this.moduleColorMap.put(this.getModuleByClass(Strafe.class), new Color(0, 204, 255));
