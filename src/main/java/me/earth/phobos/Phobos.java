@@ -138,22 +138,6 @@ public class Phobos {
         Phobos.load();
     }
 
-    public static void onUnload() {
-        if (!unloaded) {
-            try {
-                IRC.INSTANCE.disconnect();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            eventManager.onUnload();
-            moduleManager.onUnload();
-            configManager.saveConfig(Phobos.configManager.config.replaceFirst("phobos/", ""));
-            moduleManager.onUnloadPost();
-            timerManager.unload();
-            unloaded = true;
-        }
-    }
-
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         LOGGER.info("ohare is cute!!!");
