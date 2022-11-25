@@ -25,12 +25,9 @@ public class CommandManager
         this.commands.add(new UnloadCommand());
         this.commands.add(new ReloadSoundCommand());
         this.commands.add(new PeekCommand());
-        this.commands.add(new XrayCommand());
         this.commands.add(new BookCommand());
-        this.commands.add(new CrashCommand());
         this.commands.add(new HistoryCommand());
         this.commands.add(new BaritoneNoStop());
-        this.commands.add(new IRCCommand());
     }
 
     public static String[] removeElement(String[] input, int indexToDelete) {
