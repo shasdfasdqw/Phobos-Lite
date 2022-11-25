@@ -1,7 +1,6 @@
 package me.earth.phobos.features.modules.player;
 
 import me.earth.phobos.features.modules.Module;
-import me.earth.phobos.features.modules.combat.Auto32k;
 import me.earth.phobos.features.setting.Setting;
 import me.earth.phobos.util.InventoryUtil;
 import me.earth.phobos.util.Timer;
@@ -35,9 +34,6 @@ public class Replenish
 
     @Override
     public void onUpdate() {
-        if (Auto32k.getInstance().isOn() && (!Auto32k.getInstance().autoSwitch.getValue().booleanValue() || Auto32k.getInstance().switching)) {
-            return;
-        }
         if (Replenish.mc.currentScreen instanceof GuiContainer && (!(Replenish.mc.currentScreen instanceof GuiInventory) || this.pauseInv.getValue().booleanValue())) {
             return;
         }
