@@ -26,7 +26,6 @@ public class DiscordPresence {
         DiscordPresence.presence.details = Minecraft.getMinecraft().currentScreen instanceof GuiMainMenu ? "In the main menu." : "Playing " + (Minecraft.getMinecraft().currentServerData != null ? (RPC.INSTANCE.showIP.getValue().booleanValue() ? "on " + Minecraft.getMinecraft().currentServerData.serverIP + "." : " multiplayer.") : " singleplayer.");
         DiscordPresence.presence.state = RPC.INSTANCE.state.getValue();
         DiscordPresence.presence.largeImageKey = "ghost";
-        DiscordPresence.smallImageKey = "craw";
         DiscordPresence.presence.largeImageText = "Phobos 1.9.0";
         rpc.Discord_UpdatePresence(presence);
         thread = new Thread(() -> {
