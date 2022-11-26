@@ -92,10 +92,6 @@ public class AutoCrystal
     public Setting<Boolean> antiSurround = this.register(new Setting<Object>("AntiSurround", Boolean.valueOf(true), v -> this.setting.getValue() == Settings.PLACE && this.place.getValue() != false));
     public Setting<Boolean> limitFacePlace = this.register(new Setting<Object>("LimitFacePlace", Boolean.valueOf(true), v -> this.setting.getValue() == Settings.PLACE && this.place.getValue() != false));
     public Setting<Boolean> oneDot15 = this.register(new Setting<Object>("1.15", Boolean.valueOf(false), v -> this.setting.getValue() == Settings.PLACE && this.place.getValue() != false));
-    public Setting<Boolean> doublePop = this.register(new Setting<Object>("AntiTotem", Boolean.valueOf(false), v -> this.setting.getValue() == Settings.PLACE && this.place.getValue() != false));
-    public Setting<Double> popHealth = this.register(new Setting<Object>("PopHealth", Double.valueOf(1.0), Double.valueOf(0.0), Double.valueOf(3.0), v -> this.setting.getValue() == Settings.PLACE && this.place.getValue() != false && this.doublePop.getValue() != false));
-    public Setting<Float> popDamage = this.register(new Setting<Object>("PopDamage", Float.valueOf(4.0f), Float.valueOf(0.0f), Float.valueOf(6.0f), v -> this.setting.getValue() == Settings.PLACE && this.place.getValue() != false && this.doublePop.getValue() != false));
-    public Setting<Integer> popTime = this.register(new Setting<Object>("PopTime", Integer.valueOf(500), Integer.valueOf(0), Integer.valueOf(1000), v -> this.setting.getValue() == Settings.PLACE && this.place.getValue() != false && this.doublePop.getValue() != false));
     public Setting<Boolean> explode = this.register(new Setting<Object>("Break", Boolean.valueOf(true), v -> this.setting.getValue() == Settings.BREAK));
     public Setting<Switch> switchMode = this.register(new Setting<Object>("Attack", Switch.BREAKSLOT, v -> this.setting.getValue() == Settings.BREAK && this.explode.getValue() != false));
     public Setting<Integer> breakDelay = this.register(new Setting<Object>("BreakDelay", Integer.valueOf(50), Integer.valueOf(0), Integer.valueOf(500), v -> this.setting.getValue() == Settings.BREAK && this.explode.getValue() != false));
@@ -189,7 +185,6 @@ public class AutoCrystal
     public Setting<Boolean> predictRotate = this.register(new Setting<Object>("PredictRotate", Boolean.valueOf(false), v -> this.setting.getValue() == Settings.DEV));
     public Setting<Float> predictOffset = this.register(new Setting<Object>("PredictOffset", Float.valueOf(0.0f), Float.valueOf(0.0f), Float.valueOf(4.0f), v -> this.setting.getValue() == Settings.DEV));
     public Setting<Boolean> brownZombie = this.register(new Setting<Object>("BrownZombieMode", Boolean.valueOf(false), v -> this.setting.getValue() == Settings.MISC));
-    public Setting<Boolean> doublePopOnDamage = this.register(new Setting<Object>("DamagePop", Boolean.valueOf(false), v -> this.setting.getValue() == Settings.PLACE && this.place.getValue() != false && this.doublePop.getValue() != false && this.targetMode.getValue() == Target.DAMAGE));
     public boolean rotating = false;
     private Queue<Entity> attackList = new ConcurrentLinkedQueue<Entity>();
     private Map<Entity, Float> crystalMap = new HashMap<Entity, Float>();
@@ -211,7 +206,6 @@ public class AutoCrystal
     private BlockPos webPos = null;
     private BlockPos lastPos = null;
     private boolean posConfirmed = false;
-    private boolean foundDoublePop = false;
     private int rotationPacketsSpoofed = 0;
     private ScheduledExecutorService executor;
     private Thread thread;
@@ -606,11 +600,6 @@ public class AutoCrystal
         } else if (this.syncySync.getValue().booleanValue() && this.syncedCrystalPos != null) {
             this.posConfirmed = true;
         }
-        this.foundDoublePop = false;
-        if (this.renderTimer.passedMs(500L)) {
-            this.renderPos = null;
-            this.renderTimer.reset();
-        }
         this.mainHand = AutoCrystal.mc.player.getHeldItemMainhand().getItem() == Items.END_CRYSTAL;
         this.offHand = AutoCrystal.mc.player.getHeldItemOffhand().getItem() == Items.END_CRYSTAL;
         this.currentDamage = 0.0;
@@ -789,14 +778,6 @@ public class AutoCrystal
                     if (syncflag || this.currentDamage - (double) damageOffset > this.lastDamage || this.syncTimer.passedMs(this.damageSyncTime.getValue().intValue()) || this.damageSync.getValue() == DamageSync.NONE) {
                         if (!syncflag && this.damageSync.getValue() != DamageSync.BREAK) {
                             this.lastDamage = this.currentDamage;
-                        }
-                        this.renderPos = this.placePos;
-                        this.renderDamage = this.currentDamage;
-                        if (this.switchItem()) {
-                            this.currentSyncTarget = target;
-                            this.syncedPlayerPos = target.getPosition();
-                            if (this.foundDoublePop) {
-                                this.totemPops.put(target, new Timer().reset());
                             }
                             this.rotateToPos(this.placePos);
                             if (this.addTolowDmg || this.actualSlowBreak.getValue().booleanValue() && this.currentDamage < (double) this.minDamage.getValue().floatValue()) {
@@ -895,7 +876,6 @@ public class AutoCrystal
         EntityPlayer currentTarget = null;
         BlockPos currentPos = null;
         float maxSelfDamage = 0.0f;
-        this.foundDoublePop = false;
         BlockPos setToAir = null;
         IBlockState state = null;
         if (this.webAttack.getValue().booleanValue() && targettedPlayer != null && (web = AutoCrystal.mc.world.getBlockState(playerPos = new BlockPos(targettedPlayer.getPositionVector())).getBlock()) == Blocks.WEB) {
@@ -926,20 +906,6 @@ public class AutoCrystal
                     }
                     if (friendPop) continue;
                 }
-                if (this.isDoublePoppable(targettedPlayer, playerDamage) && (currentPos == null || targettedPlayer.getDistanceSq(pos) < targettedPlayer.getDistanceSq(currentPos))) {
-                    currentTarget = targettedPlayer;
-                    maxDamage = playerDamage;
-                    currentPos = pos;
-                    this.foundDoublePop = true;
-                    continue;
-                }
-                if (this.foundDoublePop || !(playerDamage > maxDamage) && (!this.extraSelfCalc.getValue().booleanValue() || !(playerDamage >= maxDamage) || !(selfDamage < maxSelfDamage)) || !(playerDamage > selfDamage || playerDamage > this.minDamage.getValue().floatValue() && !DamageUtil.canTakeDamage(this.suicide.getValue())) && !(playerDamage > EntityUtil.getHealth(targettedPlayer)))
-                    continue;
-                maxDamage = playerDamage;
-                currentTarget = targettedPlayer;
-                currentPos = pos;
-                maxSelfDamage = selfDamage;
-                continue;
             }
             float maxDamageBefore = maxDamage;
             EntityPlayer currentTargetBefore = currentTarget;
@@ -950,24 +916,6 @@ public class AutoCrystal
                 if (EntityUtil.isValid(player, this.placeRange.getValue().floatValue() + this.range.getValue().floatValue())) {
                     if (this.antiNaked.getValue().booleanValue() && DamageUtil.isNaked(player)) continue;
                     float playerDamage = DamageUtil.calculateDamage(pos, player);
-                    if (this.doublePopOnDamage.getValue().booleanValue() && this.isDoublePoppable(player, playerDamage) && (currentPos == null || player.getDistanceSq(pos) < player.getDistanceSq(currentPos))) {
-                        currentTarget = player;
-                        maxDamage = playerDamage;
-                        currentPos = pos;
-                        maxSelfDamage = selfDamage;
-                        this.foundDoublePop = true;
-                        if (this.antiFriendPop.getValue() != AntiFriendPop.BREAK && this.antiFriendPop.getValue() != AntiFriendPop.PLACE)
-                            continue;
-                        continue block0;
-                    }
-                    if (this.foundDoublePop || !(playerDamage > maxDamage) && (!this.extraSelfCalc.getValue().booleanValue() || !(playerDamage >= maxDamage) || !(selfDamage < maxSelfDamage)) || !(playerDamage > selfDamage || playerDamage > this.minDamage.getValue().floatValue() && !DamageUtil.canTakeDamage(this.suicide.getValue())) && !(playerDamage > EntityUtil.getHealth(player)))
-                        continue;
-                    maxDamage = playerDamage;
-                    currentTarget = player;
-                    currentPos = pos;
-                    maxSelfDamage = selfDamage;
-                    continue;
-                }
                 if (this.antiFriendPop.getValue() != AntiFriendPop.ALL && this.antiFriendPop.getValue() != AntiFriendPop.PLACE || player == null || !(player.getDistanceSq(pos) <= MathUtil.square(this.range.getValue().floatValue() + this.placeRange.getValue().floatValue())) || !Phobos.friendManager.isFriend(player) || !((double) (friendDamage = DamageUtil.calculateDamage(pos, player)) > (double) EntityUtil.getHealth(player) + 0.5))
                     continue;
                 maxDamage = maxDamageBefore;
@@ -1149,13 +1097,6 @@ public class AutoCrystal
             }
         }
     }
-
-    private boolean isDoublePoppable(EntityPlayer player, float damage) {
-        float health;
-        if (this.doublePop.getValue().booleanValue() && (double) (health = EntityUtil.getHealth(player)) <= this.popHealth.getValue() && (double) damage > (double) health + 0.5 && damage <= this.popDamage.getValue().floatValue()) {
-            Timer timer = this.totemPops.get(player);
-            return timer == null || timer.passedMs(this.popTime.getValue().intValue());
-        }
         return false;
     }
 
