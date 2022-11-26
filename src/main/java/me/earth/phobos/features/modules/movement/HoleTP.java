@@ -35,7 +35,7 @@ public class HoleTP
 
     @SubscribeEvent
     public void onUpdateWalkingPlayer(UpdateWalkingPlayerEvent event) {
-        if (event.getStage() == 1 && Strafe.getInstance().isOff() && LagBlock.getInstance().isOff()) {
+        if (event.getStage() == 1 && Strafe.getInstance().isOff()) {
             if (!HoleTP.mc.player.onGround) {
                 if (HoleTP.mc.gameSettings.keyBindJump.isKeyDown()) {
                     this.jumped = true;
