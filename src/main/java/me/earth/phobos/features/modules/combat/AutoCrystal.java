@@ -574,4 +574,4 @@ public class AutoCrystal
         None
 
     }
-}earth
+}
