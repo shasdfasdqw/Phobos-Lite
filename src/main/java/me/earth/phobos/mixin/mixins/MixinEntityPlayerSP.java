@@ -5,7 +5,6 @@ import me.earth.phobos.event.events.ChatEvent;
 import me.earth.phobos.event.events.MoveEvent;
 import me.earth.phobos.event.events.PushEvent;
 import me.earth.phobos.event.events.UpdateWalkingPlayerEvent;
-import me.earth.phobos.features.modules.movement.Speed;
 import me.earth.phobos.features.modules.movement.Sprint;
 import me.earth.phobos.util.Util;
 import net.minecraft.client.Minecraft;
@@ -65,15 +64,6 @@ extends AbstractClientPlayer {
         if (event.isCanceled()) {
             info.cancel();
         }
-    }
-
-    @Redirect(method={"onUpdateWalkingPlayer"}, at=@At(value="FIELD", target="net/minecraft/util/math/AxisAlignedBB.minY:D"))
-    private double minYHook(AxisAlignedBB bb) {
-        if (Speed.getInstance().isOn() && Speed.getInstance().mode.getValue() == Speed.Mode.VANILLA && Speed.getInstance().changeY) {
-            Speed.getInstance().changeY = false;
-            return Speed.getInstance().minY;
-        }
-        return bb.minY;
     }
 
     @Inject(method={"onUpdateWalkingPlayer"}, at={@At(value="RETURN")})
